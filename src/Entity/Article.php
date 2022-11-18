@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity(repositoryClass: ArticleRepository::class)]
 class Article
 {
+    use Ressourceid;
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -23,6 +24,12 @@ class Article
     #[ORM\ManyToOne(inversedBy: 'articles')]
     private ?User $author = null;
 
+    public function __construct()
+    {
+       
+        $this->createdAt = new \DateTimeImmutable();
+        
+    }
     public function getId(): ?int
     {
         return $this->id;
